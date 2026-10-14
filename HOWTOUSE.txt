@@ -1,0 +1,81 @@
+Dưới đây là nội dung văn bản chuẩn để bạn đưa vào file .md. Bản này không dùng khối code dài hay lệnh bash phức tạp mà chia nhỏ từng dòng lệnh đơn giản, dễ nhìn trên điện thoại:
+HƯỚNG DẪN CÀI ĐẶT 5-AI ENGINE TRÊN TERMUX
+Hệ thống 5-AI Engine hỗ trợ lập trình, kiểm thử và thiết kế web tự động chạy ngầm trên điện thoại qua ứng dụng Termux.
+Mã nguồn dự án: https://github.com/lequoctienbtm-maker/F.Angine
+Bước 1: Chuẩn bị 3 API Key miễn phí
+Hệ thống có cơ chế tự động xoay key khi hết hạn mức. Bạn nên chuẩn bị 3 mã key từ 3 tài khoản Gmail khác nhau:
+ * Mở trình duyệt web, vào trang: https://aistudio.google.com/
+ * Đăng nhập tài khoản Google.
+ * Bấm nút Get API key rồi chọn Create API key.
+ * Sao chép chuỗi mã hiển thị trên màn hình và lưu vào ứng dụng ghi chú.
+ * Làm tương tự với 2 tài khoản Gmail khác để có đủ 3 mã.
+Bước 2: Cài đặt các công cụ cần thiết trên Termux
+Mở ứng dụng Termux và nhập lần lượt từng dòng lệnh bên dưới (sau mỗi dòng thì nhấn phím Enter):
+Dòng 1 - Cập nhật hệ thống:
+pkg update -y
+
+Dòng 2 - Nâng cấp gói:
+pkg upgrade -y
+
+Dòng 3 - Cấp quyền truy cập bộ nhớ cho Termux (khi màn hình hiện thông báo hỏi quyền, chọn Cho phép / Allow):
+termux-setup-storage
+
+Dòng 4 - Cài đặt Python, Git và công cụ tải file:
+pkg install python git curl -y
+
+Dòng 5 - Cài đặt thư viện chạy giao diện web:
+pip install flask flask-sock
+
+Bước 3: Tải mã nguồn về máy
+Nhập 2 dòng lệnh sau để tạo thư mục và tải file code:
+Dòng 1 - Tạo và vào thư mục dự án:
+mkdir -p ~/AI_Loop_Hub && cd ~/AI_Loop_Hub
+
+Dòng 2 - Tải file server.py từ GitHub:
+curl -sL https://raw.githubusercontent.com/lequoctienbtm-maker/F.Angine/main/server.py -o server.py
+
+Bước 4: Nhập API Key của bạn vào hệ thống
+Cách chỉnh sửa file bằng trình soạn thảo có sẵn trên Termux:
+ * Nhập lệnh mở file:
+nano server.py
+
+ * Ngay những dòng đầu tiên, tìm đoạn có dạng:
+API_KEYS = [
+    "PASTE YOU API KEY",
+    "PASTE YOU API KEY",
+    "PASTE YOU API KEY",
+]
+
+ * Xóa các key mẫu cũ đi và dán 3 API Key của bạn vào giữa các dấu ngoặc kép " ".
+ * Lưu lại và thoát:
+ * Nhấn tổ hợp phím Ctrl + O rồi nhấn phím Enter để lưu.
+ * Nhấn tổ hợp phím Ctrl + X để thoát ra ngoài màn hình chính của Termux.
+Bước 5: Tạo lệnh tắt khởi động nhanh (Chỉ làm 1 lần)
+Nhập 2 dòng lệnh sau để từ lần sau chỉ cần gõ đúng chữ ai là hệ thống tự bật:
+Dòng 1:
+echo "alias ai='cd ~/AI_Loop_Hub && python server.py'" >> ~/.bashrc
+
+Dòng 2:
+source ~/.bashrc
+
+Bước 6: Khởi chạy và mở giao diện web
+ * Nhập lệnh khởi động:
+ai
+
+(Hoặc nhập: python server.py)
+ * Màn hình Termux hiển thị thông báo:
+[+] 5-AI Engine Multi-Session Studio đang hoạt động...
+[+] Web UI: http://127.0.0.1:8000
+
+ * Mở trình duyệt web bất kỳ trên điện thoại (Chrome, Cốc Cốc, Kiwi...) và truy cập vào địa chỉ:
+   http://127.0.0.1:8000
+Các tính năng chính trên giao diện Web
+ * Nút menu (3 dấu gạch ngang ở góc trên bên trái): Mở thanh danh sách để tạo đoạn chat mới. Mỗi phiên sẽ lưu trữ mã nguồn web và lịch sử trò chuyện riêng biệt, không bị lẫn vào nhau.
+ * Nút Task (BẬT/TẮT): Khi bật, AI sẽ tự chia một dự án game hoặc ứng dụng lớn thành 3 đến 5 giai đoạn phát triển nối tiếp nhau.
+ * Nút Xem Web: Mở tab mới để chạy thử và tương tác với game hoặc trang web do AI vừa lập trình.
+ * Nút Zip / Tải file: Tải toàn bộ mã nguồn của phiên hiện tại về máy điện thoại.
+ * Lệnh clear: Khi màn hình chat quá dài, bạn gõ chữ clear vào ô nhập rồi bấm Gửi để dọn sạch khung chat.
+Đoạn văn bản nhờ AI hỗ trợ cài đặt
+Nếu trong quá trình làm gặp sự cố, bạn sao chép đoạn văn bản dưới đây dán vào ChatGPT hoặc Gemini để được trợ giúp:
+Tôi đang cài đặt hệ thống 5-AI Engine từ link: https://github.com/lequoctienbtm-maker/F.Angine/blob/main/server.py trên ứng dụng Termux của Android. Hãy đóng vai trò người hỗ trợ kỹ thuật, hướng dẫn tôi từng bước thật ngắn gọn, mỗi lần chỉ đưa ra 1 lệnh duy nhất và giải thích lệnh đó làm gì, sau đó chờ tôi phản hồi kết quả rồi mới tiếp tục bước sau.
+
