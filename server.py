@@ -3,9 +3,9 @@ from flask import Flask, Response, send_file, request, jsonify, send_from_direct
 from flask_sock import Sock
 
 API_KEYS = [
-    "AQ.Ab8RN6KXokEA0sglmqcssRnEYzYvbM6UM7ov_P3kyGOLR_tNLQ",
-    "AQ.Ab8RN6IOTFTo2cOszF04SzvnY2R6Y94sYz9XLFFUD-iV9pSKyw",
-    "AQ.Ab8RN6JjmtHenj0VJYB6wudv_zNzRs40EDHeJjGKmDE69xXREQ",
+    "You API KEY HERE",
+    "You API KEY HERE",
+    "You API KEY HERE",
 ]
 
 VALID_MODELS = [
